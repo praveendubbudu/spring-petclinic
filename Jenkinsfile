@@ -28,15 +28,16 @@ pipeline {
             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
         }
        }
+      }
       stage ('Start tomcatserver') {
-      steps {
-        sh 'ssh listany@165.232.185.75'
-        sh 'echo 123456'
-        sh 'cd /opt/apache-tomcat-7.0.109'
-        sh './bin/shutdown.sh'
-     }
-    } 
+        steps {
+          sh 'ssh listany@165.232.185.75'
+          sh 'echo 123456'
+          sh 'cd /opt/apache-tomcat-7.0.109'
+          sh './bin/shutdown.sh'
+       }
+      } 
+    }
    }
-  }
  }
 
