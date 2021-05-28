@@ -17,7 +17,12 @@ pipeline {
     stage ('deploy') {
       steps {
         sshagent(['ssh-logins']) {
+            sh 'sudo su listany'
+            sh 'cd /opt/apache-tomcat-7.0.109'
+            sh './bin/shutdown.sh'
             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
+            sh 'cd /opt/apache-tomcat-7.0.109'
+            sh './bin/startup.sh'
        }
      }
    }
