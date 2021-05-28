@@ -17,7 +17,7 @@ pipeline {
     stage ('deploy') {
       steps {
         sshagent(['ssh-logins']) {
-            sh 'ssh -o StrictHostKeyChecking=no listany@165.232.185.75 -p '123456''
+            sh 'ssh -o StrictHostKeyChecking=no listany@165.232.185.75 -p 123456'
             sh 'cd /opt/apache-tomcat-7.0.109'
             sh './bin/shutdown.sh'
             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/petclinic/target/petclinic.war /opt/apache-tomcat-7.0.109/webapps'
