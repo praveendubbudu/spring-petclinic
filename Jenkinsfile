@@ -18,7 +18,7 @@ pipeline {
       steps {
         script {
         sshagent(['ssh-logins']) {
-            sh 'ssh -o StrictHostKeyChecking=no listany@165.232.185.75'
+            sh 'ssh -t -t listany@165.232.185.75 -o StrictHostKeyChecking=no'
             sh "echo 123456"
             sh 'cd /opt/apache-tomcat-7.0.109'
             sh './bin/shutdown.sh'
