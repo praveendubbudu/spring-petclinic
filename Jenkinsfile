@@ -17,6 +17,7 @@ pipeline {
     stage ('deploy') {
       steps {
         sshagent(['ssh-logins']) {
+            sh 'ssh root@165.232.185.75'
             sh 'sudo su listany'
             sh 'cd /opt/apache-tomcat-7.0.109'
             sh './bin/shutdown.sh'
