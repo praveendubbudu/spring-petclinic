@@ -14,7 +14,7 @@ pipeline {
           nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'target/petclinic.war', type: 'war']], credentialsId: 'Nexus_Credentials', groupId: 'org.springframework.samples', nexusUrl: '10.122.0.2:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'listany-admin-snapshots', version: '4.2.5-SNAPSHOT'
       }
     }
-    stage ('deploy')
+    stage ('deploy') {
       steps {
         sshagent(['deploy_user']) {
             sh 'ssh -o StrictHostKeyChecking=no root@165.232.185.75'
