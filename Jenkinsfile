@@ -14,29 +14,11 @@ pipeline {
         nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'target/petclinic.war', type: 'war']], credentialsId: 'nexus_logins', groupId: 'org.springframework.samples', nexusUrl: '10.122.0.2:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'listany-admin-snapshots', version: '4.2.5-SNAPSHOT'
       }
     }
-    stage ('stop tomcat server') {
-      steps {
-        sh 'ssh listany@165.232.185.75'
-        sh 'echo 123456'
-        sh 'cd /opt/apache-tomcat-7.0.109'
-        sh './bin/shutdown.sh'
-      }
-    }
     stage ('deploy') {
       steps {
-        sshagent(['ssh-logins']) {
-            sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
-        }
+        deploy adapters: [tomcat7(credentialsId: 'tomcat_logins', path: '', url: 'http://165.232.185.75:8080/')], contextPath: 'petclinic', war: '**/*.war'
        }
       }
-      stage ('Start tomcatserver') {
-        steps {
-          sh 'ssh listany@165.232.185.75'
-          sh 'echo 123456'
-          sh 'cd /opt/apache-tomcat-7.0.109'
-          sh './bin/shutdown.sh'
-       }
-      } 
     }
    }
 
