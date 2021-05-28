@@ -24,7 +24,8 @@ pipeline {
             sh 'scp -o StrictHostKeyChecking=no petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps/pet'
             sh 'cd /opt/apache-tomcat-7.0.109'
             sh './bin/startup.sh'
-      }
-    }
-  }
+       }
+     }
+   }
+ }
 }
