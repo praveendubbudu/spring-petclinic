@@ -16,7 +16,7 @@ pipeline {
     }
     stage ('deploy') {
       steps {
-        sshagent(['deploy_user']) {
+        sshagent(['ssh-logins']) {
             sh 'scp -o StrictHostKeyChecking=no petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
        }
      }
