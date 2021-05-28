@@ -9,14 +9,9 @@ pipeline {
         sh 'mvn clean install'
       }
     }
-    stage ('Artifacts upload to nexus') {
-      steps {
-        deploy adapters: [tomcat7(credentialsId: 'tomcat_logins', path: '', url: 'http://165.232.185.75:8080/')], contextPath: 'petclinic', war: 'var/lib/jenkins/workspace/target/*.war'
-      }
-    }
     stage ('deploy') {
       steps {
-        deploy adapters: [tomcat7(credentialsId: 'tomcat_logins', path: '', url: 'http://165.232.185.75:8080/')], contextPath: 'petclinic', war: '**/*.war'
+        deploy adapters: [tomcat7(credentialsId: 'tomcat_logins', path: '', url: 'http://165.232.185.75:8080/')], contextPath: 'petclinic', war: 'var/lib/jenkins/workspace/target/*.war'
        }
       }
     }
