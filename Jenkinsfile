@@ -17,7 +17,7 @@ pipeline {
     stage ('stop tomcat') {
           steps {
             sshagent(['Deploy_user']) {
-                  sh 'ssh -T root@165.232.185.75'
+                  sh 'ssh -T -o StrictHostKeyChecking=no 165.232.185.75 root -a'
                   sh 'su listany'
                   sh 'cd /opt/apache-tomcat-7.0.109'
                   sh './bin/shutdown.sh'
@@ -27,7 +27,7 @@ pipeline {
     stage ('deploy') {
       steps {
         sshagent(['Deploy_user']) {
-            sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
+            sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
         }
        }
       }
