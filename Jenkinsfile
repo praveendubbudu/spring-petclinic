@@ -16,8 +16,8 @@ pipeline {
     }
     stage ('stop tomcat') {
           steps {
-                  sh 'ssh -T -i /root/.ssh/jenkins-sshkey root@165.232.185.75'
-                  sh 'su listany'
+                  sh 'ssh -T listany@165.232.185.75'
+                  sh 'echo 123456'
                   sh 'cd /opt/apache-tomcat-7.0.109'
                   sh './bin/shutdown.sh'
           }
