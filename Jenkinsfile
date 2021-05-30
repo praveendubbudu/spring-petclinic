@@ -16,8 +16,8 @@ pipeline {
     }
     stage ('stop tomcat') {
           steps {
-            sshagent(['Deploy_user']) {
-                  sh 'ssh -T -o StrictHostKeyChecking=no 165.232.185.75 root -a'
+                  sh 'ssh -T root@165.232.185.75'
+                  sh 'echo 123456'
                   sh 'su listany'
                   sh 'cd /opt/apache-tomcat-7.0.109'
                   sh './bin/shutdown.sh'
