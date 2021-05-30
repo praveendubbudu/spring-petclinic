@@ -23,8 +23,7 @@ pipeline {
                   sh './bin/shutdown.sh'
           }
     }
-    }
-    stage ('deploy') {
+      stage ('deploy') {
       steps {
         sshagent(['Deploy_user']) {
             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
