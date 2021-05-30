@@ -1,11 +1,12 @@
+pipeline {
+
 def remote = [:]
 remote.name = "tomcat"
 remote.host = "165.232.185.75"
 remote.allowAnyHosts = true
 
 node {
-	pipeline {
-			agent any
+	agent any
 			tools {
 				maven 'Maven3'
       }
