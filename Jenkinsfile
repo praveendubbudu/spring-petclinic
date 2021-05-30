@@ -16,15 +16,17 @@ pipeline {
     }
     stage ('stop tomcat') {
           steps {
-                  sh 'ssh -T listany@165.232.185.75'
-                  sh 'echo 123456'
+            sshagent(['Deploy_user']) {
+                  sh 'ssh -T root@165.232.185.75'
+                  sh 'su listany'
                   sh 'cd /opt/apache-tomcat-7.0.109'
                   sh './bin/shutdown.sh'
           }
     }
+    }
     stage ('deploy') {
       steps {
-        sshagent(['deploy user']) {
+        sshagent(['Deploy_user']) {
             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
         }
        }
