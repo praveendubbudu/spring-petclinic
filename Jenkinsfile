@@ -16,7 +16,7 @@ pipeline {
     }
     stage ('stop tomcat') {
           steps {
-                  sh 'ssh root@165.232.185.75'
+                  sh 'ssh -T root@165.232.185.75'
                   sh 'su listany'
                   sh 'cd /opt/apache-tomcat-7.0.109'
                   sh './bin/shutdown.sh'
