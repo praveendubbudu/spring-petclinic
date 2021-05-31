@@ -19,7 +19,7 @@ pipeline {
         nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'target/petclinic.war', type: 'war']], credentialsId: 'nexus_logins', groupId: 'org.springframework.samples', nexusUrl: '10.122.0.2:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'listany-admin-snapshots', version: '4.2.5-SNAPSHOT'
 		}
     }
-     stage ('tomcat stop')
+          stage ('tomcat stop') {
           steps {
                   sh 'ssh -T 206.189.141.153'
                   sh 'su listany'
