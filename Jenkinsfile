@@ -15,7 +15,7 @@ pipeline {
         nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'target/petclinic.war', type: 'war']], credentialsId: 'nexus_logins', groupId: 'org.springframework.samples', nexusUrl: '10.122.0.2:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'listany-admin-snapshots', version: '4.2.5-SNAPSHOT'
 		}
     }
-	stage (SSH steps) {
+	stage ('SSH steps') {
 	  steps {
 		script{
 		sshcommand remote: remote, command 'cd /opt/apache-tomcat-7.0.109'
