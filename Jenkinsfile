@@ -17,8 +17,8 @@ pipeline {
     }
 	stage ('SSH steps') {
 	  steps {
-		sshcommand remote: remote, command 'cd /opt/apache-tomcat-7.0.109'
-		sshcommand remote: remote, command './bin/shutdown.sh'
+		sshcommand remote: remote, command: "cd /opt/apache-tomcat-7.0.109"
+		sshcommand remote: remote, command: "./bin/shutdown.sh"
 		}
 	  }
 	stage ('deploy') {
