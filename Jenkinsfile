@@ -17,12 +17,10 @@ pipeline {
     }
 	stage ('SSH steps') {
 	  steps {
-		script{
 		sshcommand remote: remote, command 'cd /opt/apache-tomcat-7.0.109'
 		sshcommand remote: remote, command './bin/shutdown.sh'
 		}
 	  }
-    }
 	stage ('deploy') {
 	steps {
 			deploy adapters: [tomcat8(credentialsId: 'deploy_user1', path: '', url: 'http://206.189.141.153:8080/')], contextPath: 'petclinic', war: '**/*.war'
