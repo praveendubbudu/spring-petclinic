@@ -12,7 +12,6 @@ pipeline {
     stage ('Archieve artifacts') {
       steps {
               archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
-              unarchive mapping: ['dir/target': 'dir/wars']
       }
     }              
     stage ('Artifacts upload to nexus') {
