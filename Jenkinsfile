@@ -1,3 +1,4 @@
+def remote = [name: 'tomcat1', host: '206.189.141.153', user: 'listany', password : '123456', allowAnyHosts: true]
 pipeline {
   agent any
   tools {
@@ -14,12 +15,18 @@ pipeline {
         nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'target/petclinic.war', type: 'war']], credentialsId: 'nexus_logins', groupId: 'org.springframework.samples', nexusUrl: '10.122.0.2:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'listany-admin-snapshots', version: '4.2.5-SNAPSHOT'
 		}
     }
-      stage ('deploy') {
-      steps {
-        sshagent(['ssh-logins']) {
-            sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/petclinic/target/petclinic.war root@165.232.185.75:/opt/apache-tomcat-7.0.109/webapps'
+	stage (SSH steps) {
+	  steps {
+		script{
+		sshcommand remote: remote, command 'cd /opt/apache-tomcat-7.0.109'
+		sshcommand remote: remote, command './bin/shutdown.sh'
+		}
+	  }
+    }
+	stage ('deploy') {
+	steps {
+			deploy adapters: [tomcat8(credentialsId: 'deploy_user1', path: '', url: 'http://206.189.141.153:8080/')], contextPath: 'petclinic', war: '**/*.war'
         }
        }
       }
-     }
-    }      
+     }    
