@@ -11,7 +11,7 @@ pipeline {
     }
     stage ('Archieve artifacts') {
       steps {
-              archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
+              archiveArtifacts artifacts: 'target/*.war, target/*.jar', onlyIfSuccessful: true
       }
     }              
     stage ('Artifacts upload to nexus') {
@@ -29,7 +29,7 @@ pipeline {
   }
 	stage ('deploy') {
 	steps {
-			deploy adapters: [tomcat8(credentialsId: 'deploy_user1', path: '', url: 'http://206.189.141.153:8080/')], contextPath: 'petclinic', war: '**/*.war'
+                deploy adapters: [tomcat7(credentialsId: 'Tomcat_logins', path: '', url: 'http://143.110.176.126:8080/')], contextPath: 'petclinic', war: '**/*.war'
         }
        }
       }
