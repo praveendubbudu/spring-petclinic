@@ -25,7 +25,7 @@ pipeline {
       }
     }
     stage ('Tomcat Restart') {
-      script {
+      steps {
                 def remote = [:]
                 remote.name = 'tomcat'
                 remote.host = '143.110.176.126'
