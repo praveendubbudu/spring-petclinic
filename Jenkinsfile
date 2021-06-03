@@ -33,9 +33,7 @@ pipeline {
                 remote.user = 'listany'
                 remote.password = '123456'
                 remote.allowAnyHosts = true
-                stage('Remote SSH') {
                 sshCommand remote: remote, command: "sudo service tomcat restart"
-         }
         }
        }
       }
