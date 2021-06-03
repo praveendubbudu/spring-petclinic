@@ -22,18 +22,19 @@ pipeline {
     stage ('deploy') {
       steps {
                 deploy adapters: [tomcat7(credentialsId: 'Tomcat_logins', path: '', url: 'http://143.110.176.126:8080/')], contextPath: 'petclinic', war: '**/*.war'
+      }
+    }
+    stage ('Tomcat Restart') {
+      script {
+                def remote = [:]
+                remote.name = 'tomcat'
+                remote.host = '143.110.176.126'
+                remote.user = 'listany'
+                remote.password = '123456'
+                remote.allowAnyHosts = true
+                stage('Remote SSH') {
+                sshCommand remote: remote, command: "sudo service tomcat restart"
+         }
         }
        }
-    node {
-    def remote = [:]
-    remote.name = 'tomcat'
-    remote.host = '143.110.176.126'
-    remote.user = 'listany'
-    remote.password = '123456'
-    remote.allowAnyHosts = true
-    stage('Remote SSH') {
-      sshCommand remote: remote, command: "sudo service tomcat restart"
-    }
-}
       }
-     }
