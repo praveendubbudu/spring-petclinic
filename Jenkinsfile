@@ -27,13 +27,13 @@ pipeline {
     stage ('Tomcat Restart') {
       steps {
         script {
-                withCredentials([string(credentialsId: 'Tomcat_HOST_NAME', variable: 'Host'), string(credentialsId: 'Listany_Password', variable: 'Password')]) {
                 def remote = [:]
                 remote.name = 'tomcat'
-                remote.host = '$Host'
+                remote.host = '143.110.176.126'
+                remote.allowAnyHosts = true
+                withCredentials([string(credentialsId: 'Tomcat_HOST_NAME', variable: 'Host'), string(credentialsId: 'Listany_Password', variable: 'Password')]) {
                 remote.user = 'listany'
                 remote.password = '$password'
-                remote.allowAnyHosts = true
                 sshCommand remote: remote, command: "sudo service tomcat restart"
         }
        }
