@@ -32,8 +32,8 @@ pipeline {
                 remote.host = '143.110.176.126'
                 remote.allowAnyHosts = true
                 withCredentials([string(credentialsId: 'username', variable: 'Username'), string(credentialsId: 'Listany_Password', variable: 'Password')]) {
-                remote.user = '$Username'
-                remote.password = '$Password'
+                remote.user = 'Username'
+                remote.password = 'Password'
                 sshCommand remote: remote, command: "sudo service tomcat restart"
         }
        }
