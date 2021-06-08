@@ -13,7 +13,7 @@ pipeline {
        withSonarQubeEnv('SonarQube') {
        sh "mvn sonar:sonar"
         }
-   
+    } 
     stage ('Archieve artifacts') {
       steps {
               archiveArtifacts artifacts: 'target/*.war, target/*.jar', onlyIfSuccessful: true
