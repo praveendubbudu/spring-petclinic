@@ -10,10 +10,12 @@ pipeline {
       }
     }
     stage ('Code Quality scan')  {
+      steps {
        withSonarQubeEnv('SonarQube') {
        sh "mvn sonar:sonar"
         }
     } 
+    }   
     stage ('Archieve artifacts') {
       steps {
               archiveArtifacts artifacts: 'target/*.war, target/*.jar', onlyIfSuccessful: true
