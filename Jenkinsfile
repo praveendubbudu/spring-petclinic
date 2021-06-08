@@ -9,6 +9,11 @@ pipeline {
         sh 'mvn clean install'
       }
     }
+    stage ('Code Quality scan')  {
+       withSonarQubeEnv('SonarQube') {
+       sh "mvn sonar:sonar"
+        }
+   
     stage ('Archieve artifacts') {
       steps {
               archiveArtifacts artifacts: 'target/*.war, target/*.jar', onlyIfSuccessful: true
