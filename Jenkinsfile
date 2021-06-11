@@ -23,7 +23,7 @@ pipeline {
     }              
     stage ('deploy') {
       steps {
-                deploy adapters: [tomcat7(credentialsId: 'Tomcat_logins', path: '', url: 'http://143.110.176.126:8080/')], contextPath: 'petclinic', war: '**/*.war'
+        deploy adapters: [tomcat8(credentialsId: 'Tomcat_logins', path: '', url: 'http://143.110.176.126:8080/')], contextPath: 'petclinic', war: '**/*.war'
       }
     }
     stage ('Tomcat Restart') {
