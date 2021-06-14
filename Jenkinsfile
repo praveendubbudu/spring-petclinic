@@ -4,10 +4,12 @@ pipeline {
   stages {
     stage('build') {
       steps {
+        script {
         maven 'Maven3'
         sh 'mvn clean install'
       }
     }
+   }
     stage ('Code Quality scan')  {
       steps {
        withSonarQubeEnv('SonarQube') {
