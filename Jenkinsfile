@@ -1,9 +1,10 @@
 pipeline {
   agent any
-    
-  stages {
+   stages {
     stage ('Checkout') {
       steps {
+        script {
+          Git 'Git-1.8'
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github_logins', url: 'https://github.com/praveendubbudu/spring-petclinic.git']]])
       }
     }
