@@ -2,7 +2,12 @@ pipeline {
   agent any
     
   stages {
-    stage('build') {
+    stage ('Checkout') {
+      steps {
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github_logins', url: 'https://github.com/praveendubbudu/spring-petclinic.git']]])
+      }
+    }
+    stage('Build') {
       steps {
         script {
         maven 'Maven3'
@@ -10,7 +15,7 @@ pipeline {
       }
     }
    }
-    stage ('Code Quality scan')  {
+    stage ('SonarQube Analysis')  {
       steps {
        withSonarQubeEnv('SonarQube') {
        sh "mvn sonar:sonar"
