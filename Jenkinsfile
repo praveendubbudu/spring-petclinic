@@ -1,18 +1,10 @@
 pipeline {
   agent any
-  tools {
-          Git 'Git-1.8'
-  }
-   stages {
-    stage ('Checkout') {
-      steps {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github_logins', url: 'https://github.com/praveendubbudu/spring-petclinic.git']]])
-      }
-     }
     stage('Build') {
       steps {
         script {
         maven 'Maven3'
+        jdk 'openjdk1.8'  
         sh 'mvn clean install'
       }
     }
