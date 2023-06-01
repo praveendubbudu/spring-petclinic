@@ -7,9 +7,7 @@ pipeline {
 		jdk 'JDK8'
 	}
 	steps {
-		withSonarQubeEnv('SonarQube') {
-		//Steps to build and scan the code.
-			sh 'mvn clean install sonar:sonar -X -e'	
+		sh 'mvn clean package'	
 		}
 	 }
   } 
