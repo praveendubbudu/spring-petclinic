@@ -4,7 +4,7 @@ pipeline {
     stage('Build && SonarQube analysis') {
 	tools {
 		maven 'Maven3'
-		jdk 'JDK11'
+		jdk 'JDK8'
 	}
 	steps {
 		withSonarQubeEnv('SonarQube') {
